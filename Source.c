@@ -4,7 +4,7 @@
 #include<string.h>
 #include<math.h>
 
-#pragma warning(disable : 4996)
+#pragma warning(disable : 4996 6031)
 
 
 //Pour se simplifier la vie sur les unsigned int
@@ -14,9 +14,9 @@ typedef unsigned int uint;
 enum {
     MAX_ENTREPRISES = 50,
     MAX_MISSIONS = 500,
-    MAX_CHAR = 30,
+    MAX_CHAR = 31,
     MAX_SOUSTRAITANCE = 5,
-    MAX_CHAR_ROLE = 2,
+    MAX_CHAR_ROLE = 3,
 };
 
 typedef struct {
@@ -42,16 +42,24 @@ void quitter() {
 }
 
 //Commande 1
-int inscription(Entreprise *entreprises, int* nbEntreprises) {
+int inscription(Entreprise *entreprises, int nbEntreprises) {
     Entreprise nvEntreprise;
-    scanf("%s %s", &nvEntreprise.role, &nvEntreprise.nom);
-    entreprises[]
+    char nom[MAX_CHAR];
+    char role[MAX_CHAR_ROLE];
+    scanf("%s %s", &role, &nom);
+    nvEntreprise.Identifiant = nbEntreprises + 1;
+    strcpy(nvEntreprise.nom, nom);
+    strcpy(nvEntreprise.role, role);
+    entreprises[nbEntreprises] = nvEntreprise;
+    nbEntreprises++;
+    return 0;
 }
 
 int main() {
 
     char commande[MAX_CHAR];
     Entreprise entreprises[MAX_ENTREPRISES];
+    int nbEntreprises = 0;
 
     scanf("%s", &commande);
 
@@ -60,9 +68,8 @@ int main() {
             quitter();
             break;
         case 1 :
-            inscription(entreprises);
+            inscription(entreprises, nbEntreprises);
             break;
-
     }
     return 0;
 }
